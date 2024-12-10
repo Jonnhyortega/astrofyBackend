@@ -1,11 +1,13 @@
 import nodemailer from "nodemailer";
 import picocolors from "picocolors";
+import dotenv from "dotenv";
 
+dotenv.config();
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: "jonnhyortega@gmail.com", // Tu correo de Gmail
-    pass: "vlqx ivdi obgf lxtm",    // Contraseña o App Password de Gmail
+    user: "jonnhyortega@gmail.com", 
+    pass: process.env.PASSNODEMAILER,   
   },
 });
 
@@ -25,7 +27,6 @@ export const sendEmail = async (to: string, code: string): Promise<void> => {
   }
 };
 
-// Función para notificar siempre a jonnhyortega@gmail.com
 export const giveNotice = async (userEmail: string): Promise<void> => {
   try {
     const AVISAR_AUTH = {
