@@ -7,10 +7,10 @@ import { check } from "express-validator";
 
 const router = Router();
 
-router.get("/", [validarJWT, searchErrors], getOrders);
+router.get("/get-orders", [validarJWT, searchErrors], getOrders);
 
 router.post(
-  "/",
+  "/create-order",
   [
     validarJWT,
     isVerified,

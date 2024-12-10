@@ -5,6 +5,7 @@ export interface IProduct {
   title: string;
   price: number;
   description: string;
+  category: string;
   image: string;
 }
 
@@ -25,6 +26,10 @@ const ProductSchema = new Schema<IProduct>({
   description: {
     type: String,
     required: [true, "La descripción del producto es obligatoria"], 
+  },
+  category:{
+    type: String,
+    required: [true, "La categoria es obligatoria"],
   },
   image: {
     type: String,

@@ -28,7 +28,7 @@ export class Server {
 
   routes(): void {
     this.app.use("/auth", authRoutes);
-    this.app.use("/register-product", productRoutes);
+    this.app.use("/api", productRoutes);
     this.app.use("/orders", orderRoutes);
   }
 

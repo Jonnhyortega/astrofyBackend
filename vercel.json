@@ -1,16 +1,51 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "app.ts",
-        "use": "@vercel/node"
-      }
-    ],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "app.ts"
-      }
-    ]
-  }
-  
+  "version": 2,
+  "builds": [
+    {
+      "src": "app.ts",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/products",
+      "dest": "app.ts"
+    },
+    {
+      "src": "/api/products-electronic",
+      "dest": "app.ts"
+    },
+    {
+      "src": "/api/products-clothes-mens",
+      "dest": "app.ts"
+    },
+    {
+      "src": "/api/products-jewelry",
+      "dest": "app.ts"
+    },
+    {
+      "src": "/api/products-clothes-womens",
+      "dest": "app.ts"
+    },
+    {
+      "src": "/api/orders/get-orders",
+      "dest": "app.ts"
+    },
+    {
+      "src": "/api/orders/create-order",
+      "dest": "app.ts"
+    },
+    {
+      "src": "/api/auth/register",
+      "dest": "app.ts"
+    },
+    {
+      "src": "/api/auth/login",
+      "dest": "app.ts"
+    },
+    {
+      "src": "/api/auth/verify",
+      "dest": "app.ts"
+    }
+  ]
+}
