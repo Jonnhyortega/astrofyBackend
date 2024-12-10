@@ -28,23 +28,23 @@
       "dest": "app.ts"
     },
     {
-      "src": "/api/orders/get-orders",
+      "src": "/orders/get-orders",
       "dest": "app.ts"
     },
     {
-      "src": "/api/orders/create-order",
+      "src": "/orders/create-order",
       "dest": "app.ts"
     },
     {
-      "src": "/api/auth/register",
+      "src": "/auth/register",
       "dest": "app.ts"
     },
     {
-      "src": "/api/auth/login",
+      "src": "/auth/login",
       "dest": "app.ts"
     },
     {
-      "src": "/api/auth/verify",
+      "src": "/auth/verify",
       "dest": "app.ts"
     }
   ]
