@@ -22,8 +22,21 @@ export class Server {
   }
 
   middlewares(): void {
+    const allowedOrigins = ["https://astrofy-ashy.vercel.app/"];
+    const corsOptions = {
+      origin: (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+          callback(null, true); 
+        } else {
+          callback(new Error("Not allowed by CORS")); 
+        }
+      },
+      credentials: true, 
+    };
+
+    this.app.options("*", cors(corsOptions));
+    this.app.use(cors(corsOptions)); 
     this.app.use(express.json());
-    this.app.use(cors());
   }
 
   routes(): void {
