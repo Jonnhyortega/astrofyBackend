@@ -32,10 +32,13 @@ export const register = async (req: Request, res: Response): Promise<void> => {
 
     // Send a verification email to the user
     await sendEmail(email, newCode);
+
     //  SEND VERIFICATION EMAIL TO CREATOR OF APLICATION (ME:D) 
     await giveNotice(email)
+    
     // Respond with a success status and the saved user details
-    res.status(201).json({ usuario });
+    res.status(201).json({ usuario, msg: `Se ha enviado el codigo de autenticacion al correo ${email}, para poder loguiarse por favor introducir el codigo.` });
+  
   } catch (error) {
     // Log the error for debugging purposes
     console.error("Error durante el proceso de registro:", error);

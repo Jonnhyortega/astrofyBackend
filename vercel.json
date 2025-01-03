@@ -2,50 +2,14 @@
   "version": 2,
   "builds": [
     {
-      "src": "dist/app.js",
+      "src": "/app.js", 
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
-      "src": "/api/products",
-      "dest": "dist/app.js"
-    },
-    {
-      "src": "/api/products-electronic",
-      "dest": "dist/app.js"
-    },
-    {
-      "src": "/api/products-clothes-mens",
-      "dest": "dist/app.js"
-    },
-    {
-      "src": "/api/products-jewelry",
-      "dest": "dist/app.js"
-    },
-    {
-      "src": "/api/products-clothes-womens",
-      "dest": "dist/app.js"
-    },
-    {
-      "src": "/orders/get-orders",
-      "dest": "dist/app.js"
-    },
-    {
-      "src": "/orders/create-order",
-      "dest": "dist/app.js"
-    },
-    {
-      "src": "/auth/register",
-      "dest": "dist/app.js"
-    },
-    {
-      "src": "/auth/login",
-      "dest": "dist/app.js"
-    },
-    {
-      "src": "/auth/verify",
-      "dest": "dist/app.js"
+      "src": "/(.*)",
+      "dest": "/src" 
     }
   ]
 }

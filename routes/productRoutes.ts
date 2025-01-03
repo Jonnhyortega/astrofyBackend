@@ -2,7 +2,7 @@ import { Router } from "express";
 import { check } from "express-validator";
 // import { existingProduct } from "../helpers/validationsDB";
 import { searchErrors } from "../middlewares/searchErrors";
-import { getProducts, getProductsElectronics, getProductsJewelery, getProductsMens, getProductsWomens, newProduct } from "../controllers/product";
+import { getProducts, newProduct } from "../controllers/product";
 
 const router = Router();
 
@@ -20,10 +20,5 @@ router.post(
 );
 
 router.get("/products", getProducts);
-router.get("/products-electronic", getProductsElectronics)
-router.get("/products-clothes-mens", getProductsMens)
-router.get("/products-jewelry", getProductsJewelery)
-router.get("/products-clothes-womens", getProductsWomens)
-
 
 export default router;

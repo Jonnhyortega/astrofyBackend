@@ -5,6 +5,9 @@ import { register } from "../controllers/auth";
 import { searchErrors } from "../middlewares/searchErrors";
 import { verifyUser } from "../controllers/verifyUser";
 import { login } from "../controllers/login";
+import validarJWT from "../middlewares/validateJWT";
+import { changePw } from "../controllers/changePassword";
+import { changeName } from "../controllers/changeName";
 
 const router = Router();
 
@@ -15,8 +18,8 @@ router.post(
     check("email", "Formato incorrecto").isEmail(),
     check(
       "password",
-      "El password debe contener al menos 8 caracteres"
-    ).isLength({ min: 6, max: 8 }),
+      "El password debe contener 8 caracteres"
+    ).isLength({ min: 8, max: 8 }),
     check("email").custom(emailExists),
     searchErrors,
   ],
@@ -27,7 +30,6 @@ router.post(
 	"/login",
 	[
 		check("email", "El email es obligatorio").isEmail(),
-		check("password", "El password debe ser de 6 caracteres").isLength({ min: 6, max: 8 }),
 		searchErrors,
 	],
 	login
@@ -42,5 +44,15 @@ router.patch(
 	],
 	verifyUser
 )
+
+router.get("/verify-token", validarJWT, (req, res) => {
+  res.status(200).json({ msg: "Token válido y usuario autenticado" });
+  const codigoParaCompilar = req.body
+  return codigoParaCompilar
+});
+
+router.patch("/change-password", validarJWT, changePw);
+router.patch("/change-name", validarJWT, changeName);
+
 
 export default router;

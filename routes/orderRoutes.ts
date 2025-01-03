@@ -7,16 +7,12 @@ import { check } from "express-validator";
 
 const router = Router();
 
-router.get("/get-orders", [validarJWT, searchErrors], getOrders);
-
 router.post(
   "/create-order",
   [
     validarJWT,
     isVerified,
-    check("price", "El precio es obligatorio").not().isEmpty(),
     check("shippingCost", "El costo de envío es obligatorio").not().isEmpty(),
-    check("total", "El total es obligatorio").not().isEmpty(),
     check("shippingDetails", "Los detalles de envío son obligatorios")
       .not()
       .isEmpty(),
@@ -25,5 +21,8 @@ router.post(
   ],
   createOrder
 );
+
+router.get("/all-orders", validarJWT, getOrders);
+
 
 export default router

@@ -2,16 +2,15 @@ import { Response, Request } from "express";
 import User, { IUser } from "../models/usuario";
 import bcrypt from "bcryptjs";
 import generateJWT from "../helpers/tokenGenerator";
-import picocolors from "picocolors";
+
 
 export const login = async (req: Request, res: Response): Promise<void> => {
   const { email, password }: IUser = req.body;
 
   try {
-    // search email in DB
     const usuario = await User.findOne({ email });
+
     if (usuario) {
-    // COMPARE PASSWORD USER WITH PASSWORD ENCRIPTED
       const passwordValidate = bcrypt.compareSync(password, usuario.password);
       if (!passwordValidate) {
         res.status(400).json({
@@ -19,22 +18,28 @@ export const login = async (req: Request, res: Response): Promise<void> => {
         });
         return;
       }
+
+      if (!usuario.verified) {
+        res.status(403).json({
+          msg: `Por favor verifique la cuenta para poder ingresar. Le hemos enviado nuevamente el código a ${email}`,
+        });
+        return;
+      }
+
       const token = await generateJWT(usuario.id);
       res.json({
         usuario,
         token,
-        msg: "Las contraseñas coincidieron"
-      })
-      console.log(picocolors.bgRed("Credenciales correctas 😎"))
-      return
+        msg: "Las contraseñas coincidieron",
+      });
+      return;
     }
 
     res.status(400).json({
-      msg: "No se encontro el email en la base de datos",
+      msg: "No se encontró el email en la base de datos. ¿Lo escribiste bien?",
     });
-    return;
   } catch (error) {
-    console.log(error);
-    console.log(picocolors.bgRed("Error al identificar al usuario"));
+    console.error("Error al identificar al usuario", error);
+    res.status(500).json({ msg: "Error interno del servidor" });
   }
 };

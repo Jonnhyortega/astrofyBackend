@@ -1,11 +1,13 @@
 import { Model, Schema, model, Types } from "mongoose";
-import { IProduct } from "./product";
 
 interface IShippingDetails {
   name: string;
   cellphone: string;
-  location: string;
   address: string;
+  dni:number;
+  cardNumber: number;
+  cardName: string;
+  cardCode: number;
 }
 
 export interface IOrder {
@@ -13,11 +15,12 @@ export interface IOrder {
   user: Types.ObjectId;
   price: number;
   shippingCost: number;
-  items: IProduct[];
+  items: { product: Types.ObjectId; quantity: number }[]; 
   shippingDetails: IShippingDetails;
   status: string;
   total: number;
 }
+
 
 const OrderSchema = new Schema<IOrder>({
   createdAt: {
@@ -27,10 +30,6 @@ const OrderSchema = new Schema<IOrder>({
   user: {
     type: Schema.Types.ObjectId,
     ref: "Usuario",
-    required: true,
-  },
-  price: {
-    type: Number,
     required: true,
   },
   shippingCost: {
@@ -43,10 +42,6 @@ const OrderSchema = new Schema<IOrder>({
         type: Schema.Types.ObjectId,
         ref: "Product",
         required: true,
-      },
-      price: {
-        type: Number,
-        require: true
       },
       quantity: {
         type: Number,
@@ -63,13 +58,25 @@ const OrderSchema = new Schema<IOrder>({
       type: String,
       required: true,
     },
-    location: {
-      type: String,
-      required: true,
-    },
     address: {
       type: String,
       required: true,
+    },
+    dni: {
+      type: String,
+      required: true,
+    },
+    cardNumber:{
+      type: Number,
+      required: true,
+    },
+    cardName: {
+      type: String,
+      required: true
+    },
+    cardCode:{
+      type: Number,
+      required: true
     },
   },    
   status: {
