@@ -2,12 +2,12 @@
   "name": "astrofyclbackend",
   "version": "1.0.0",
   "description": "Proyecto con fines academicos",
-  "main": "./app.ts",
+  "main": "app.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
-    "start": "node ./app.ts",
-    "dev": "nodemon --exec ts-node src/app.ts"
+    "start": "node app.ts",
+    "dev": "nodemon --exec ts-node /app.ts"
   },
   "keywords": [],
   "author": "",

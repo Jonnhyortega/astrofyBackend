@@ -1,51 +1,67 @@
 {
   "compilerOptions": {
     /* General Settings */
-    "target": "es2016",
-    "module": "commonjs",
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "skipLibCheck": true,
+    "target": "es2016" /* Compilar a ES2016. */,
+    "module": "commonjs" /* Usar módulos CommonJS (Node.js). */,
+    "esModuleInterop": true /* Mejorar interoperabilidad con ESModules. */,
+    "forceConsistentCasingInFileNames": true /* Asegurar consistencia en nombres de archivos. */,
+    "strict": true /* Habilitar comprobaciones estrictas. */,
+    "skipLibCheck": true /* Omitir comprobación de tipos en bibliotecas. */,
 
-    /* React Specific */
-    "jsx": "react-jsx",                                 /* Optimize for React 17+ projects with JSX runtime. */
-    "allowSyntheticDefaultImports": true,              /* Enable default imports for React modules. */
+    /* React Specific (puedes eliminar estas opciones si no usas React) */
+    "jsx": "react-jsx",
+    "allowSyntheticDefaultImports": true,
 
     /* Module Resolution */
-    "moduleResolution": "node",                        /* Ensure Node.js module resolution. */
-    "resolveJsonModule": true,                         /* Allow importing JSON files. */
-    "baseUrl": "./",                                   /* Simplify imports with a base URL. */
+    "moduleResolution": "node" /* Resolución de módulos estilo Node.js. */,
+    "resolveJsonModule": true /* Permitir importar archivos JSON. */,
+    "baseUrl": "./" /* Simplificar rutas relativas. */,
     "paths": {
-      "@components/*": ["src/components/*"],           /* Add alias for common folders. */
-      "@utils/*": ["src/utils/*"],
-      "@styles/*": ["src/styles/*"]
+      /* Alias de rutas si decides implementarlos. */
+      "@controllers/*": ["controllers/*"],
+      "@middlewares/*": ["middlewares/*"],
+      "@routes/*": ["routes/*"],
+      "@database/*": ["database/*"],
+      "@helpers/*": ["helpers/*"],
+      "@mailer/*":["mailer/*"],
+      "@models/*":["models/*"]
     },
 
-    "outDir": "./dist",                                /* Specify output directory for compiled files. */
-    "sourceMap": true,                                 /* Enable source maps for easier debugging. */
-    "removeComments": true,                            /* Clean up output by removing comments. */
-    "declaration": true,                               /* Emit .d.ts files for TypeScript declarations. */
+    /* Output */
+    "outDir": "./dist" /* Carpeta de salida para los compilados. */,
+    "rootDir": "." /* Directorio raíz del proyecto. */,
+    "sourceMap": true /* Habilitar mapas de fuente para depuración. */,
+    "removeComments": true /* Eliminar comentarios del código compilado. */,
+    "declaration": true /* Generar archivos .d.ts. */,
 
     /* Type Checking */
-    "strictNullChecks": true,                          /* Ensure strict null/undefined checking. */
-    "noUnusedLocals": true,                            /* Warn for unused local variables. */
-    "noUnusedParameters": true,                        /* Warn for unused parameters. */
-    "noImplicitReturns": true,                         /* Ensure all code paths return a value. */
-    "noFallthroughCasesInSwitch": true,                /* Disallow fallthrough in switch cases. */
+    "strictNullChecks": true /* Forzar comprobación de null/undefined. */,
+    "noUnusedLocals": true /* Advertir sobre variables locales sin usar. */,
+    "noUnusedParameters": true /* Advertir sobre parámetros sin usar. */,
+    "noImplicitReturns": true /* Asegurar que todas las rutas devuelvan un valor. */,
+    "noFallthroughCasesInSwitch": true /* Prevenir errores en switch sin break. */,
 
     /* JavaScript Interop */
-    "allowJs": true,                                   /* Enable inclusion of .js files. */
-    "checkJs": false,                                  /* Disable type checking for JavaScript files. */
+    "allowJs": true /* Permitir incluir archivos .js. */,
+    "checkJs": false /* No verificar tipos en archivos JavaScript. */,
 
     /* Experimental Options */
-    "useDefineForClassFields": true                    /* Adopt ES-standard class field emit behavior. */
+    "useDefineForClassFields": true /* Usar comportamiento estándar para campos de clase. */
   },
-  "include": ["src", "app.ts", "controllers", "database", "helpers", "mailer", "middlewares", "models", "routes"],                                   /* Include the source directory for compilation. */
-  "exclude": ["node_modules", "dist"],                 /* Exclude unnecessary directories. */
+  "include": [
+    "*.ts",
+    "controllers",
+    "database",
+    "helpers",
+    "mailer",
+    "middlewares",
+    "models",
+    "routes"
+  ] /* Archivos incluidos en la compilación. */,
+  "exclude": ["node_modules", "dist"] /* Excluir carpetas innecesarias. */,
   "ts-node": {
-    /* Additional Settings for ts-node */
-    "transpileOnly": true,                             /* Speed up compilation by skipping type checking. */
-    "files": true                                      /* Include all files specified in include array. */
+    /* Configuración para ts-node */
+    "transpileOnly": true /* Transpilar sin comprobación de tipos para mayor velocidad. */,
+    "files": true /* Incluir todos los archivos especificados en include. */
   }
 }
