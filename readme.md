@@ -11,7 +11,3 @@
 myaccount.google.com/apppasswords
 
 # Datos para el .env
-
-DB_URL = 
-
-PORT = 8080
