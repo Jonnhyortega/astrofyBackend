@@ -22,7 +22,7 @@ export class Server {
   }
 
   middlewares(): void {
-    const allowedOrigins = ["https://astrofy-ashy.vercel.app/"];
+    const allowedOrigins = ["https://astrofy-ashy.vercel.app"];
     const corsOptions = {
       origin: (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
         if (!origin || allowedOrigins.includes(origin)) {
