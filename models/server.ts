@@ -21,36 +21,31 @@ export class Server {
     await dbConnection();
   }
 
-  // middlewares(): void {
-  //   const allowedOrigins = ["https://astrofy-ashy.vercel.app"];
-  //   const corsOptions = {
-  //     origin: (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
-  //       if (!origin || allowedOrigins.includes(origin)) {
-  //         callback(null, true); 
-  //       } else {
-  //         callback(new Error("Not allowed by CORS")); 
-  //       }
-  //     },
-  //     credentials: true, 
-  //   };
-
-  //   this.app.options("*", cors(corsOptions));
-  //   this.app.use(cors(corsOptions)); 
-  //   this.app.use(express.json());
-  // }
-
   middlewares(): void {
     this.app.use(express.json());
-  
-    
+
     this.app.use(
       cors({
-        origin: "*", 
+        origin: ["http://localhost:3000", "https://astrofy-ashy.vercel.app"],
         methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
-        allowedHeaders: ["Content-Type", "Authorization",  "x-token"], 
+        allowedHeaders: ["Content-Type", "Authorization", "x-token"],
+        credentials: true,
       })
     );
   }
+
+  //  MIDDLEWARE PARA LOCAL
+  // middlewares(): void {
+  //   this.app.use(express.json());
+
+  //   this.app.use(
+  //     cors({
+  //       origin: "*",
+  //       methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+  //       allowedHeaders: ["Content-Type", "Authorization",  "x-token"],
+  //     })
+  //   );
+  // }
 
   routes(): void {
     this.app.use("/auth", authRoutes);
