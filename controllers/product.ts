@@ -36,7 +36,7 @@ export const newProduct = async (
 };
 
 export const getProducts = async (
-  // req: Request,
+  req: Request,
   res: Response
 ): Promise<void> => {
   try {

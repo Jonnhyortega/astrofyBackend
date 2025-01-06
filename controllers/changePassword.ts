@@ -23,6 +23,13 @@ export const changePw = async (req: Request, res: Response): Promise<void> => {
       return;
     }
 
+    if (passwordValidate == newPassword) {
+      res.status(401).json({
+        msg: "Las contrseñas no pueden ser iguales",
+      });
+      return;
+    }
+
     const salt = bcrypt.genSaltSync(10);
     const hashedNewPassword = bcrypt.hashSync(newPassword, salt);
 

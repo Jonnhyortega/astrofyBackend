@@ -14,7 +14,7 @@ const router = Router();
 router.post(
   "/register",
   [
-    check("name", "El nombre es obligatoro").not().isEmpty(),
+    check("name", "El nombre es obligatorio").not().isEmpty(),
     check("email", "Formato incorrecto").isEmail(),
     check(
       "password",
@@ -52,6 +52,7 @@ router.get("/verify-token", validarJWT, (req, res) => {
 });
 
 router.patch("/change-password", validarJWT, changePw);
+
 router.patch("/change-name", validarJWT, changeName);
 
 

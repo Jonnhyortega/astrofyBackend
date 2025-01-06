@@ -7,42 +7,44 @@ import { giveNotice, sendEmail } from "../mailer/mailer";
 
 export const register = async (req: Request, res: Response): Promise<void> => {
   try {
-    // Extract user details from the request body
     const { name, email, password, rol }: IUser = req.body;
 
-    // Create a new user instance with the provided details
     const usuario = new User({ name, email, password, rol });
 
-    // Hash the password before saving it to the database
-    const salt = bcrypt.genSaltSync(); // Generate a salt for hashing
-    usuario.password = bcrypt.hashSync(password, salt); // Encrypt the password
+    const salt = bcrypt.genSaltSync();
+    usuario.password = bcrypt.hashSync(password, salt);
 
-    // Check if the user is an admin based on the provided admin key
-    const adminKey = req.headers["admin-key"]; // Retrieve the admin key from request headers
+    const adminKey = req.headers["admin-key"];
     if (adminKey === process.env.KEYFORADMIN) {
       usuario.rol = ROLES.admin;
     }
 
-    // Generate a verification code for the user
-    const newCode = randomstring.generate(6); 
-    usuario.code = newCode; 
+    const newCode = randomstring.generate(6);
+    usuario.code = newCode;
 
-    // Save the user to the database
     await usuario.save();
 
-    // Send a verification email to the user
     await sendEmail(email, newCode);
+    await giveNotice(email);
 
-    //  SEND VERIFICATION EMAIL TO CREATOR OF APLICATION (ME:D) 
-    await giveNotice(email)
-    
-    // Respond with a success status and the saved user details
-    res.status(201).json({ usuario, msg: `Se ha enviado el codigo de autenticacion al correo ${email}, para poder loguiarse por favor introducir el codigo.` });
-  
-  } catch (error) {
-    // Log the error for debugging purposes
-    console.error("Error durante el proceso de registro:", error);
-    // Respond with a 500 status and a generic error message
-    res.status(500).json({ error: "Error al registrar el usuario" });
+    res.status(201).json({
+      usuario,
+      msg: `Se ha enviado el código de autenticación al correo ${email}.`,
+    });
+  } catch (error: any) {
+    if (error.code === 11000) {
+      res.status(400).json({
+        msg: "El correo ya está registrado.",
+      });
+    } else if (error.name === "ValidationError") {
+      res.status(400).json({
+        msg: "Error de validación en los datos enviados.",
+      });
+    } else {
+      console.error("Error durante el proceso de registro:", error);
+      res.status(500).json({
+        msg: "Error interno del servidor. Intente más tarde.",
+      });
+    }
   }
 };
