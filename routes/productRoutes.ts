@@ -1,8 +1,8 @@
 import { Router } from "express";
 import { check } from "express-validator";
-// import { existingProduct } from "../helpers/validationsDB";
 import { searchErrors } from "../middlewares/searchErrors";
 import { getProducts, newProduct } from "../controllers/product";
+import cors from "cors";
 
 const router = Router();
 
@@ -19,6 +19,8 @@ router.post(
   newProduct
 );
 
-router.get("/products", getProducts);
+router.get("/products", cors({
+  origin: "*", 
+}), getProducts);
 
 export default router;
