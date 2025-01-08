@@ -26,7 +26,7 @@ export class Server {
 
     this.app.use(
       cors({
-        origin: ["https://astrofy-ashy.vercel.app"],
+        origin: "*",
         methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
         allowedHeaders: ["Content-Type", "Authorization", "x-token"],
         credentials: true,

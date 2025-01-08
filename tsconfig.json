@@ -23,8 +23,8 @@
       "@routes/*": ["routes/*"],
       "@database/*": ["database/*"],
       "@helpers/*": ["helpers/*"],
-      "@mailer/*":["mailer/*"],
-      "@models/*":["models/*"]
+      "@mailer/*": ["mailer/*"],
+      "@models/*": ["models/*"]
     },
 
     /* Output */
