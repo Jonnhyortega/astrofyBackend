@@ -48,6 +48,19 @@ export class Server {
   // }
 
   routes(): void {
+    this.app.get("/", (_, res) => {
+      res.send(`
+        <html>
+          <head>
+            <title>Astrofy Backend</title>
+          </head>
+          <body>
+            <h1>Bienvenido a Astrofy Backend</h1>
+            <p>Este es el backend para la aplicación Astrofy.</p>
+          </body>
+        </html>
+      `);
+    });
     this.app.use("/auth", authRoutes);
     this.app.use("/api", productRoutes);
     this.app.use("/orders", orderRoutes);
